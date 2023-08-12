@@ -27,6 +27,9 @@ Breakdown
 - Check lighthouse score
 - Deploy to Vercel
 - Document
+- Loading state
+- Error state
+- Empty state
 
 */
 
@@ -44,7 +47,7 @@ export default function Home() {
       </Header>
 
       <section className="max-w-5xl mx-auto">
-        <Onboarding />
+        {/* <Onboarding /> */}
         <Board />
       </section>
     </main>
