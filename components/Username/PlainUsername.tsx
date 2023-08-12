@@ -8,7 +8,7 @@ export function PlainUsername({ setEditable }) {
         type="button"
         onClick={() => setEditable(true)}
         aria-label="Edit"
-        className="text-2xl text-violet-500"
+        className="text-2xl"
       >
         <TbEdit />
       </button>

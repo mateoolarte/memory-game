@@ -3,8 +3,8 @@ import { useReducer } from "react";
 import { useFetchData } from "@/hooks/useFetchData";
 import { initialState, reducer } from "@/reducer";
 
-import { Card } from "../Card";
 import { Statistics } from "../Statistics";
+import { Cards } from "../Cards";
 
 export function Board() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -14,24 +14,17 @@ export function Board() {
 
   // if (!username && !level) return null;
   const { data, loading, firstOption, secondOption } = state;
-  useFetchData({ nItems: 2, dispatch });
+  useFetchData({ nItems: 6, dispatch });
 
   return (
-    <div>
+    <section className="max-w-5xl mx-auto mb-8">
       <Statistics />
-      {data.map((item) => {
-        return (
-          <Card
-            key={item.id}
-            name={item.name}
-            reference={item.reference}
-            image={item.image}
-            dispatch={dispatch}
-            firstOption={firstOption}
-            secondOption={secondOption}
-          />
-        );
-      })}
-    </div>
+      <Cards
+        data={data}
+        dispatch={dispatch}
+        firstOption={firstOption}
+        secondOption={secondOption}
+      />
+    </section>
   );
 }

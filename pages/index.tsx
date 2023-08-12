@@ -50,9 +50,7 @@ export default function Home() {
         <Username />
       </Header>
 
-      <section className="max-w-5xl mx-auto">
-        <Board />
-      </section>
+      <Board />
     </>
   );
 }

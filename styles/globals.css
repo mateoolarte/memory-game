@@ -9,3 +9,61 @@ body {
 main {
   @apply font-sans;
 }
+
+.Card {
+  width: 100%;
+  height: 10rem;
+}
+
+@media screen and (min-width: 768px) {
+  .Card {
+    height: 12rem;
+  }
+}
+
+.Card-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.Card--active .Card-container {
+  transform: rotateY(180deg);
+}
+
+.Card-front,
+.Card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  @apply bg-violet-800 rounded-md p-2;
+}
+
+.Card-frontContent {
+  @apply w-full h-full bg-slate-100 rounded-md flex items-center justify-center;
+}
+
+.Card-back {
+  transform: rotateY(180deg);
+}
+
+.Card-backContent {
+  @apply w-full h-full relative;
+}
+
+.Card-image {
+  @apply w-full h-full rounded-md object-cover;
+}
+
+.Card-name {
+  @apply absolute bottom-1 left-2 font-serif text-2xl text-violet-700;
+  text-shadow: rgb(248 250 252) 1px 0 6px;
+}
+
+.Card-icon {
+  @apply text-8xl font-bold text-violet-800;
+}
