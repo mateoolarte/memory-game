@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export function transformData(data) {
   const result = [];
 
@@ -6,13 +8,12 @@ export function transformData(data) {
     const { image } = fields || {};
 
     const payload = {
-      id: Math.floor(Math.random() * 1000), // TODO: Search for a better implementation
       name: image?.title || "",
       reference: image?.uuid || "",
       image: image?.url || "",
     };
 
-    result.push(payload, payload);
+    result.push({ ...payload, id: uuidv4() }, { ...payload, id: uuidv4() });
   });
 
   return result.sort(() => Math.random() - 0.5);

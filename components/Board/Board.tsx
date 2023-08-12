@@ -13,10 +13,8 @@ export function Board() {
   // const level = clientSide && window.localStorage.getItem("level");
 
   // if (!username && !level) return null;
-  const { data, loading } = state;
+  const { data, loading, firstOption, secondOption } = state;
   useFetchData({ nItems: 2, dispatch });
-
-  console.log({ state });
 
   return (
     <div>
@@ -28,6 +26,9 @@ export function Board() {
             name={item.name}
             reference={item.reference}
             image={item.image}
+            dispatch={dispatch}
+            firstOption={firstOption}
+            secondOption={secondOption}
           />
         );
       })}
