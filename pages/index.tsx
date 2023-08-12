@@ -40,16 +40,19 @@ export default function Home() {
   const historialGames =
     clientSide && window.localStorage.getItem("played-games");
 
+  if (true) {
+    return <Onboarding />;
+  }
+
   return (
-    <main>
+    <>
       <Header>
         <Username />
       </Header>
 
       <section className="max-w-5xl mx-auto">
-        {/* <Onboarding /> */}
         <Board />
       </section>
-    </main>
+    </>
   );
 }
