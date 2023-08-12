@@ -40,7 +40,7 @@ export default function Home() {
   const historialGames =
     clientSide && window.localStorage.getItem("played-games");
 
-  if (true) {
+  if (false) {
     return <Onboarding />;
   }
 
