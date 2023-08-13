@@ -40,6 +40,7 @@ export function Congratulations({ dispatch }) {
         changing the level
       </p>
       <Select
+        required
         label="Game Level"
         id="level"
         options={levels}

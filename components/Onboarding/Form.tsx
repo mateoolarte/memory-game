@@ -51,6 +51,7 @@ export function Form({ setIsOnboarding }) {
         error={errors.username}
       />
       <Select
+        required
         label="Game Level"
         id="level"
         options={levels}
