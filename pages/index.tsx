@@ -1,9 +1,12 @@
+import { useEffect, useReducer } from "react";
+
 import { Onboarding } from "@/components/Onboarding";
 import { Game } from "@/components/Game";
 
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { useEffect, useState } from "react";
+import { StoreContext } from "@/context/StoreContext";
 
+import { initialState, reducer } from "@/reducer";
+import { CHECK_USER_SETTINGS } from "@/actions";
 /*
 Breakdown
 
@@ -40,21 +43,18 @@ Breakdown
 */
 
 export default function Home() {
-  const username = useLocalStorage("username");
-  const level = useLocalStorage("level");
-
-  const [isOnboarding, setIsOnboarding] = useState(false);
+  const store = useReducer(reducer, initialState);
+  const [_, dispatch] = store;
 
   useEffect(() => {
-    if (!username.getItem() && !level.getItem()) {
-      setIsOnboarding(true);
-    }
+    dispatch({ type: CHECK_USER_SETTINGS });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <>
-      {isOnboarding && <Onboarding setIsOnboarding={setIsOnboarding} />}
-      {!isOnboarding && <Game />}
-    </>
+    <StoreContext.Provider value={store}>
+      <Onboarding />
+      <Game />
+    </StoreContext.Provider>
   );
 }

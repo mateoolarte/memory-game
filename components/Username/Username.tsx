@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { StoreContext } from "@/context/StoreContext";
+import { UPDATE_USERNAME } from "@/actions";
 
 import { PlainUsername } from "./PlainUsername";
 import { EditableUsername } from "./EditableUsername";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export function Username() {
-  const { getItem, setItem } = useLocalStorage("username");
+  const [state, dispatch] = useContext(StoreContext);
   const [editable, setEditable] = useState(false);
 
-  const username = getItem();
+  const { username } = state?.settings;
 
   function handleUpdate(value) {
-    setItem(value);
+    dispatch({ type: UPDATE_USERNAME, payload: value });
     setEditable(false);
   }
 

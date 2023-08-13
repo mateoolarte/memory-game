@@ -1,18 +1,7 @@
-import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Berkshire_Swash, DM_Sans } from "next/font/google";
 
-const berkshire = Berkshire_Swash({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-berkshire",
-});
-
-const dmSans = DM_Sans({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-});
+import { dmSans, berkshire } from "@/assets/fonts";
+import "@/assets/styles.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

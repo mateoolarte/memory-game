@@ -1,20 +1,21 @@
+import { useContext, useState } from "react";
+
+import { StoreContext } from "@/context/StoreContext";
+import { SET_USER_SETTINGS } from "@/actions";
 import { levels } from "@/data/levels";
+import { validateUsername } from "@/utils/validateUsername";
 
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { Select } from "../Select";
-import { useState } from "react";
-import { validateUsername } from "@/utils/validateUsername";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const initialErrors = {
   username: "",
   level: "",
 };
 
-export function Form({ setIsOnboarding }) {
-  const localUsername = useLocalStorage("username");
-  const localLevel = useLocalStorage("level");
+export function Form() {
+  const [_, dispatch] = useContext(StoreContext);
 
   const [username, setUsername] = useState("");
   const [level, setLevel] = useState("");
@@ -33,10 +34,12 @@ export function Form({ setIsOnboarding }) {
   function handleData(e) {
     e.preventDefault();
 
-    localUsername.setItem(username);
-    localLevel.setItem(level);
+    const payload = { username, level: level };
 
-    setIsOnboarding(false);
+    dispatch({
+      type: SET_USER_SETTINGS,
+      payload,
+    });
   }
 
   return (

@@ -1,32 +1,24 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { StoreContext } from "@/context/StoreContext";
 
 import { levels } from "@/data/levels";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { GAME_START } from "@/actions";
 
 import { Select } from "../Select";
 import { Button } from "../Button";
 
-export function Congratulations({ dispatch }) {
-  const localUsername = useLocalStorage("username");
-  const localLevel = useLocalStorage("level");
-  const localData = useLocalStorage("data");
-
-  const level = localLevel.getItem();
+export function Congratulations() {
+  const [state, dispatch] = useContext(StoreContext);
+  const { settings } = state;
+  const { username, level } = settings;
 
   const [updateLevel, setUpdateLevel] = useState(level);
-
-  const username = localUsername.getItem();
 
   function handleStart(e) {
     e.preventDefault();
 
-    if (updateLevel !== level) {
-      localLevel.setItem(updateLevel);
-      localData.removeItem();
-    }
-
-    dispatch({ type: GAME_START });
+    dispatch({ type: GAME_START, payload: Number(updateLevel) });
   }
 
   return (

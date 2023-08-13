@@ -1,14 +1,10 @@
-import { useEffect, useReducer } from "react";
+import { useContext, useMemo } from "react";
 
+import { StoreContext } from "@/context/StoreContext";
 import { useFetchData } from "@/hooks/useFetchData";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { initialState, reducer } from "@/reducer";
-import {
-  SUCCESS_ATTEMPT,
-  ERROR_ATTEMPT,
-  GAME_COMPLETED,
-  VALIDATE_ATTEMPT,
-} from "@/actions";
+import { useValidateAttempt } from "@/hooks/useValidateAttempt";
+import { useGameCompleted } from "@/hooks/useGameCompleted";
+import { transformData } from "@/utils/transformData";
 
 import { Statistics } from "../Statistics";
 import { Cards } from "../Cards";
@@ -16,70 +12,29 @@ import { Congratulations } from "../Congratulations";
 import { Loading } from "../Loading";
 
 export function Board() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { getItem } = useLocalStorage("level");
+  const [state] = useContext(StoreContext);
+  const { game } = state;
 
-  const level = Number(getItem());
-  const {
-    data,
-    loading,
-    validating,
-    finished,
-    successAttempts,
-    errorAttempts,
-    firstOption,
-    secondOption,
-  } = state;
+  const { data, loading, finished } = game;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const parsedData = useMemo(() => transformData(data), [data, finished]);
 
-  useFetchData({ nItems: level, dispatch });
-
-  useEffect(() => {
-    const turnCompleted = firstOption.reference && secondOption.reference;
-    const areOptionsEqual = firstOption.reference === secondOption.reference;
-
-    if (turnCompleted) {
-      dispatch({ type: VALIDATE_ATTEMPT });
-      if (areOptionsEqual) {
-        setTimeout(() => {
-          dispatch({ type: SUCCESS_ATTEMPT, payload: firstOption.reference });
-        }, 1100);
-      } else {
-        setTimeout(() => {
-          dispatch({ type: ERROR_ATTEMPT });
-        }, 1100);
-      }
-    }
-  }, [firstOption, secondOption]);
-
-  useEffect(() => {
-    if (successAttempts.length === level) {
-      dispatch({ type: GAME_COMPLETED });
-    }
-  }, [successAttempts]);
+  useFetchData();
+  useValidateAttempt();
+  useGameCompleted();
 
   if (loading) return <Loading />;
 
   return (
-    <section className="max-w-5xl mx-auto mb-8">
+    <section className="container-boxed mb-8">
       {!finished && (
         <>
-          <Statistics
-            level={level}
-            success={successAttempts.length}
-            errors={errorAttempts}
-          />
-          <Cards
-            data={data}
-            dispatch={dispatch}
-            firstOption={firstOption}
-            secondOption={secondOption}
-            successAttempts={successAttempts}
-            validating={validating}
-          />
+          <Statistics />
+          <Cards data={parsedData} />
         </>
       )}
 
-      {finished && <Congratulations dispatch={dispatch} />}
+      {finished && <Congratulations />}
     </section>
   );
 }

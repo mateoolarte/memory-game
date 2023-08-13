@@ -1,46 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 
+import { StoreContext } from "@/context/StoreContext";
 import { getAnimals } from "@/services/animals";
-import { transformData } from "@/utils/transformData";
 import {
   INIT_FETCH_DATA,
   SUCCESS_FETCH_DATA,
   FAIL_FETCH_DATA,
 } from "@/actions";
-import { isClientSide } from "@/constants";
-import { useLocalStorage } from "./useLocalStorage";
 
-export function useFetchData(options) {
-  const { nItems, dispatch } = options;
-
-  const { getItem, setItem } = useLocalStorage("data");
-  const localData = getItem();
+export function useFetchData() {
+  const [state, dispatch] = useContext(StoreContext);
+  const { game, settings } = state;
+  const { level } = settings;
+  const { data } = game;
 
   useEffect(() => {
-    dispatch({ type: INIT_FETCH_DATA });
+    if (level > 0 && data.length === 0) {
+      dispatch({ type: INIT_FETCH_DATA });
 
-    if (isClientSide && localData) {
-      dispatch({
-        type: SUCCESS_FETCH_DATA,
-        payload: transformData(JSON.parse(localData)),
-      });
-    } else {
-      if (nItems) {
-        getAnimals(nItems)
-          .then((res) => {
-            dispatch({
-              type: SUCCESS_FETCH_DATA,
-              payload: transformData(res),
-            });
-            if (isClientSide) {
-              setItem(JSON.stringify(res));
-            }
-          })
-          .catch((err) => {
-            dispatch({ type: FAIL_FETCH_DATA });
-            console.log({ err });
+      getAnimals(level)
+        .then((res) => {
+          dispatch({
+            type: SUCCESS_FETCH_DATA,
+            payload: res,
           });
-      }
+        })
+        .catch((err) => {
+          dispatch({ type: FAIL_FETCH_DATA });
+          console.log({ err });
+        });
     }
-  }, [nItems, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [level, data]);
 }
