@@ -29,6 +29,7 @@ export function EditableUsername({ username, handleUpdate, setEditable }) {
         aria-label="Update"
         className="text-2xl sm:text-3xl text-violet-500"
         onClick={() => handleUpdate(updateUsername)}
+        disabled={errors.username}
       >
         <TbCircleCheck />
       </button>

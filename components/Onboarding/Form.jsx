@@ -62,7 +62,9 @@ export function Form() {
         value={level}
         onChange={handleLevel}
       />
-      <Button type="submit">Save</Button>
+      <Button type="submit" disabled={errors.username || errors.level}>
+        Save
+      </Button>
     </form>
   );
 }
