@@ -7,17 +7,22 @@ import {
   SUCCESS_FETCH_DATA,
   FAIL_FETCH_DATA,
 } from "@/actions";
+import { isClientSide } from "@/constants";
+import { useLocalStorage } from "./useLocalStorage";
 
 export function useFetchData(options) {
   const { nItems, dispatch } = options;
 
+  const { getItem, setItem } = useLocalStorage("data");
+  const localData = getItem();
+
   useEffect(() => {
     dispatch({ type: INIT_FETCH_DATA });
 
-    if (typeof window !== "undefined" && window.localStorage.getItem("data")) {
+    if (isClientSide && localData) {
       dispatch({
         type: SUCCESS_FETCH_DATA,
-        payload: transformData(JSON.parse(window.localStorage.getItem("data"))),
+        payload: transformData(JSON.parse(localData)),
       });
     } else {
       getAnimals(nItems)
@@ -26,8 +31,8 @@ export function useFetchData(options) {
             type: SUCCESS_FETCH_DATA,
             payload: transformData(res),
           });
-          if (typeof window !== "undefined") {
-            window.localStorage.setItem("data", JSON.stringify(res));
+          if (isClientSide) {
+            setItem(JSON.stringify(res));
           }
         })
         .catch((err) => {

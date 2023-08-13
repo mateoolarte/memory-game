@@ -1,4 +1,25 @@
-export function Input({ type = "text", id, label, placeholder }) {
+import classNames from "classnames";
+
+export function Input(props) {
+  const {
+    type = "text",
+    id,
+    label,
+    placeholder,
+    value,
+    onChange,
+    required,
+    error,
+  } = props;
+
+  const classNameInput = classNames(
+    "block w-full rounded-md border-gray-300 shadow-sm focus:border-violet-300 focus:ring focus:ring-violet-200 focus:ring-opacity-50",
+    {
+      "border-rose-500 text-rose-600 focus:border-rose-500 focus:ring-rose-500":
+        error,
+    }
+  );
+
   return (
     <div className="flex flex-col gap-2 text-slate-600">
       {label && (
@@ -7,11 +28,15 @@ export function Input({ type = "text", id, label, placeholder }) {
         </label>
       )}
       <input
+        className={classNameInput}
+        required={required}
         type={type}
         id={id}
-        className="block w-full rounded-md border-gray-300 shadow-sm focus:border-violet-300 focus:ring focus:ring-violet-200 focus:ring-opacity-50 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
         placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
       />
+      {error && <p className="text-pink-600">{error}</p>}
     </div>
   );
 }

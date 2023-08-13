@@ -2,24 +2,28 @@ import { useState } from "react";
 
 import { PlainUsername } from "./PlainUsername";
 import { EditableUsername } from "./EditableUsername";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 export function Username() {
+  const { getItem, setItem } = useLocalStorage("username");
   const [editable, setEditable] = useState(false);
-  // const clientSide = typeof window !== "undefined";
-  // const username = clientSide && window.localStorage.getItem("username");
 
-  // if (!username) return null;
+  const username = getItem();
 
-  function handleUpdate(e) {
-    e.preventDefault();
+  function handleUpdate(value) {
+    setItem(value);
+    setEditable(false);
   }
 
   return (
     <div className="flex gap-2">
-      {!editable && <PlainUsername setEditable={setEditable} />}
+      {!editable && (
+        <PlainUsername username={username} setEditable={setEditable} />
+      )}
 
       {editable && (
         <EditableUsername
+          username={username}
           handleUpdate={handleUpdate}
           setEditable={setEditable}
         />

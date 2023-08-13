@@ -5,6 +5,7 @@ export function Button({
   children,
   style = "primary",
   disabled,
+  onClick,
 }) {
   const classNames = classnames("py-2 px-4 rounded-md text-lg", {
     "bg-violet-500 text-slate-50 shadow-md hover:bg-violet-600":
@@ -12,7 +13,12 @@ export function Button({
   });
 
   return (
-    <button type={type} className={classNames} disabled={disabled}>
+    <button
+      type={type}
+      className={classNames}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

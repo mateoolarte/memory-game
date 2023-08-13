@@ -1,9 +1,9 @@
 import { TbEdit } from "react-icons/tb";
 
-export function PlainUsername({ setEditable }) {
+export function PlainUsername({ username, setEditable }) {
   return (
     <>
-      <h2>mateoolarte</h2>
+      <h2>Hi, {username}</h2>
       <button
         type="button"
         onClick={() => setEditable(true)}

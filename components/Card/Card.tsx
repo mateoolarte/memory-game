@@ -1,45 +1,39 @@
-import { useState } from "react";
 import classnames from "classnames";
 import { TbQuestionMark } from "react-icons/tb";
 
-import { SELECT_CARD, ERROR_ATTEMPT, SUCCESS_ATTEMPT } from "@/actions";
+import { SELECT_CARD } from "@/actions";
 
 export function Card({
   dispatch,
+  id,
   reference,
   image,
   name,
   firstOption,
   secondOption,
+  successAttempts,
+  validating,
 }) {
-  const [active, setActive] = useState(false);
-
   function handleClick(e) {
     e.preventDefault();
 
-    setActive(!active);
-
-    if (firstOption) {
-      if (firstOption === e.currentTarget.name) {
-        dispatch({ type: SUCCESS_ATTEMPT, payload: e.currentTarget.name });
-      } else {
-        dispatch({ type: ERROR_ATTEMPT });
-      }
-    } else {
-      dispatch({ type: SELECT_CARD, payload: e.currentTarget.name });
-    }
+    dispatch({ type: SELECT_CARD, payload: { reference, id } });
   }
 
+  const isActive =
+    successAttempts.includes(reference) ||
+    firstOption.id === id ||
+    secondOption.id === id;
+
   const className = classnames("Card", {
-    "Card--active": active,
+    "Card--active": isActive,
   });
 
   return (
     <button
       type="button"
       onClick={handleClick}
-      disabled={firstOption && secondOption}
-      name={reference}
+      disabled={isActive || validating}
       className={className}
     >
       <div className="Card-container">

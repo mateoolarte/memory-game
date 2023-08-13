@@ -1,56 +1,60 @@
-import { Header } from "@/components/Header";
-import { Username } from "@/components/Username";
 import { Onboarding } from "@/components/Onboarding";
-import { Board } from "@/components/Board";
+import { Game } from "@/components/Game";
+
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useEffect, useState } from "react";
 
 /*
 Breakdown
 
 - Configure data for localstorage
+
 - Header component
 - Input & Select component
-- Setup API
-- Parse API response
-- Modal component
-- Edit username
-  - Limit number of characters
-- Change level
-- Cache API data
+- Congratulations component
 - Statistics component
 - Layout card
 - Layout board
-- Set state with useReducer
-  - Define actions
-  - Define reducers
+
+- Setup API
+- Parse API response
+- Cache API data
 - Handle error in the api
-- Unit & Funcional test
-- Check lighthouse score
-- Deploy to Vercel
-- Document
+
 - Loading state
 - Error state
 - Empty state
 
+- Edit username
+  - Limit number of characters
+- Change level
+- Set state with useReducer
+  - Define actions
+  - Define reducers
+
+  - Unit & Funcional test
+- Check lighthouse score
+- Deploy to Vercel
+- Document
+
 */
 
 export default function Home() {
-  const clientSide = typeof window !== "undefined";
-  const username = clientSide && window.localStorage.getItem("username");
-  const level = clientSide && window.localStorage.getItem("level");
-  const historialGames =
-    clientSide && window.localStorage.getItem("played-games");
+  const username = useLocalStorage("username");
+  const level = useLocalStorage("level");
 
-  if (false) {
-    return <Onboarding />;
-  }
+  const [isOnboarding, setIsOnboarding] = useState(false);
+
+  useEffect(() => {
+    if (!username.getItem() && !level.getItem()) {
+      setIsOnboarding(true);
+    }
+  }, []);
 
   return (
     <>
-      <Header>
-        <Username />
-      </Header>
-
-      <Board />
+      {isOnboarding && <Onboarding setIsOnboarding={setIsOnboarding} />}
+      {!isOnboarding && <Game />}
     </>
   );
 }
