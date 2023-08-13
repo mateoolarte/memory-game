@@ -1,4 +1,4 @@
-export async function getAnimals(nItems = 10) {
+export async function getAnimals(nItems = 6) {
   try {
     const response = await fetch(
       `https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=${nItems}`

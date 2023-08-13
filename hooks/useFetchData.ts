@@ -25,20 +25,22 @@ export function useFetchData(options) {
         payload: transformData(JSON.parse(localData)),
       });
     } else {
-      getAnimals(nItems)
-        .then((res) => {
-          dispatch({
-            type: SUCCESS_FETCH_DATA,
-            payload: transformData(res),
+      if (nItems) {
+        getAnimals(nItems)
+          .then((res) => {
+            dispatch({
+              type: SUCCESS_FETCH_DATA,
+              payload: transformData(res),
+            });
+            if (isClientSide) {
+              setItem(JSON.stringify(res));
+            }
+          })
+          .catch((err) => {
+            dispatch({ type: FAIL_FETCH_DATA });
+            console.log({ err });
           });
-          if (isClientSide) {
-            setItem(JSON.stringify(res));
-          }
-        })
-        .catch((err) => {
-          dispatch({ type: FAIL_FETCH_DATA });
-          console.log({ err });
-        });
+      }
     }
   }, [nItems, dispatch]);
 }

@@ -39,8 +39,6 @@ export function Form({ setIsOnboarding }) {
     setIsOnboarding(false);
   }
 
-  console.log({ level });
-
   return (
     <form onSubmit={handleData} className="flex flex-col gap-4">
       <Input
