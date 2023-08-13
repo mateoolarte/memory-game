@@ -25,7 +25,7 @@ export function Onboarding() {
   ];
 
   return (
-    <form className="bg-slate-50 flex flex-col w-11/12 max-w-md mx-auto mt-10 py-6 px-4 rounded-lg shadow gap-4">
+    <form className="bg-slate-50 flex flex-col w-11/12 max-w-md mx-auto mt-8 sm:mt-10 py-6 px-4 rounded-lg shadow gap-4">
       <div className="text-center">
         <Logo />
         <p className="mt-4 mb-2 text-slate-600 text-left text-xl font-bold">

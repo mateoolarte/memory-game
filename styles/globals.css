@@ -40,11 +40,11 @@ main {
   height: 100%;
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
-  @apply bg-violet-800 rounded-md p-2;
+  @apply bg-violet-500 rounded-md p-1;
 }
 
 .Card-frontContent {
-  @apply w-full h-full bg-slate-100 rounded-md flex items-center justify-center;
+  @apply w-full h-full bg-slate-50 rounded-md flex items-center justify-center;
 }
 
 .Card-back {
@@ -60,10 +60,12 @@ main {
 }
 
 .Card-name {
-  @apply absolute bottom-1 left-2 font-serif text-2xl text-violet-700;
-  text-shadow: rgb(248 250 252) 1px 0 6px;
+  @apply absolute font-serif text-3xl text-slate-50;
+  bottom: -0.5rem;
+  left: -1rem;
+  text-shadow: rgb(2 6 23) 1px 0 6px;
 }
 
 .Card-icon {
-  @apply text-8xl font-bold text-violet-800;
+  @apply text-8xl font-bold text-violet-500;
 }

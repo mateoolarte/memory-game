@@ -5,6 +5,7 @@ import { initialState, reducer } from "@/reducer";
 
 import { Statistics } from "../Statistics";
 import { Cards } from "../Cards";
+import { Congratulations } from "../Congratulations";
 
 export function Board() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -18,13 +19,19 @@ export function Board() {
 
   return (
     <section className="max-w-5xl mx-auto mb-8">
-      <Statistics />
-      <Cards
-        data={data}
-        dispatch={dispatch}
-        firstOption={firstOption}
-        secondOption={secondOption}
-      />
+      {true && (
+        <>
+          <Statistics />
+          <Cards
+            data={data}
+            dispatch={dispatch}
+            firstOption={firstOption}
+            secondOption={secondOption}
+          />
+        </>
+      )}
+
+      {false && <Congratulations />}
     </section>
   );
 }
