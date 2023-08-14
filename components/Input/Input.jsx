@@ -36,7 +36,7 @@ export function Input(props) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      {error && <p className="text-pink-600">{error}</p>}
+      {error && <p className="input-errorMessage text-pink-600">{error}</p>}
     </div>
   );
 }

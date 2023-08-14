@@ -10,10 +10,10 @@ export function Statistics() {
 
   return (
     <div className="flex items-center gap-4 mb-6 px-4 xl:px-0">
-      <p className="sm:text-lg text-green-500 font-medium">
+      <p className="success-attempts sm:text-lg text-green-500 font-medium">
         Success: {successAttempts.length}/{level}
       </p>
-      <p className="sm:text-lg text-rose-500 font-medium">
+      <p className="errors-attempts sm:text-lg text-rose-500 font-medium">
         Errors: {errorAttempts}
       </p>
     </div>

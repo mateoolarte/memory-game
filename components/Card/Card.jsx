@@ -20,8 +20,8 @@ export function Card({ id, reference, image, name }) {
     successAttempts.includes(reference) ||
     firstOption.id === id ||
     secondOption.id === id;
-  const className = classnames("Card", {
-    "Card--active": isActive,
+  const className = classnames("card", {
+    "card--active": isActive,
   });
 
   return (
@@ -31,23 +31,23 @@ export function Card({ id, reference, image, name }) {
       disabled={isActive || validating}
       className={className}
     >
-      <div className="Card-container">
-        <div className="Card-front">
-          <div className="Card-frontContent">
-            <TbQuestionMark className="Card-icon" />
+      <div className="card-container">
+        <div className="card-front">
+          <div className="card-frontContent">
+            <TbQuestionMark className="card-icon" />
           </div>
         </div>
-        <div className="Card-back">
-          <div className="Card-backContent">
+        <div className="card-back">
+          <div className="card-backContent">
             {image && (
               <img
                 src={image}
-                className="Card-image"
+                className="card-image"
                 alt={name}
                 loading="lazy"
               />
             )}
-            <h3 className="Card-name">{name}</h3>
+            <h3 className="card-name">{name}</h3>
           </div>
         </div>
       </div>

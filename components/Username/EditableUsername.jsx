@@ -27,7 +27,7 @@ export function EditableUsername({ username, handleUpdate, setEditable }) {
       <button
         type="submit"
         aria-label="Update"
-        className="text-2xl sm:text-3xl text-violet-500"
+        className="username-submitBtn text-2xl sm:text-3xl text-violet-500"
         onClick={() => handleUpdate(updateUsername)}
         disabled={errors.username}
       >
@@ -36,7 +36,7 @@ export function EditableUsername({ username, handleUpdate, setEditable }) {
       <button
         type="submit"
         aria-label="Cancel"
-        className="text-2xl sm:text-3xl text-rose-500"
+        className="username-cancelBtn text-2xl sm:text-3xl text-rose-500"
         onClick={() => setEditable(false)}
       >
         <TbCircleX />

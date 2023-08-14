@@ -24,7 +24,7 @@ export function Congratulations() {
   return (
     <div className="box">
       <span className="text-center text-5xl">🎉</span>
-      <h2 className="text-slate-600 text-center text-xl font-bold">
+      <h2 className="congratulations-title text-slate-600 text-center text-xl font-bold">
         ¡Congratulations! {username}
       </h2>
       <p className="mb-2 text-slate-600">
