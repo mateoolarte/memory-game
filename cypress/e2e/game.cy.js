@@ -32,12 +32,16 @@ describe("Game", () => {
     cy.get(".errors-attempts").contains("Errors: 1");
   });
 
-  it.only("should update the success attempt if I chose the right cards", () => {
-    cy.get(".card").contains("Bear").click({ force: true });
-    // cy.get(".card")
-    //   .should("not.have.class", "card--active")
-    //   .contains("Bear")
-    //   .click({ force: true });
+  it("should update the success attempt if I chose the right cards", () => {
+    cy.visit("http://localhost:3000/", {
+      onBeforeLoad(win) {
+        win.localStorage.setItem("username", "testgame");
+        win.localStorage.setItem("level", "6");
+        win.localStorage.setItem("data", JSON.stringify(data.slice(0, 1)));
+      },
+    });
+    cy.get(".card").eq(0).click();
+    cy.get(".card").eq(1).click();
 
     cy.get(".success-attempts").contains("Success: 1/6");
   });

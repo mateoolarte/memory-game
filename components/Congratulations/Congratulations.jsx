@@ -7,6 +7,7 @@ import { GAME_START } from "@/actions";
 
 import { Select } from "../Select";
 import { Button } from "../Button";
+import { Statistics } from "../Statistics";
 
 export function Congratulations() {
   const [state, dispatch] = useContext(StoreContext);
@@ -31,6 +32,11 @@ export function Congratulations() {
         You have been completed the game successfully, now you can try again
         changing the level
       </p>
+
+      <div className="flex justify-center">
+        <Statistics />
+      </div>
+
       <Select
         required
         label="Game Level"

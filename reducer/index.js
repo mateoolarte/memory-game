@@ -163,8 +163,6 @@ export function reducer(state, action) {
         game: {
           ...state.game,
           loading: false,
-          successAttempts: [],
-          errorAttempts: 0,
           firstOption: option,
           secondOption: option,
           validating: false,
@@ -191,6 +189,8 @@ export function reducer(state, action) {
         game: {
           ...state.game,
           finished: false,
+          successAttempts: [],
+          errorAttempts: 0,
           data: action.payload !== state.settings.level ? [] : state.game.data,
         },
       };
