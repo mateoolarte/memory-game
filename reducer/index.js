@@ -83,6 +83,7 @@ export function reducer(state, action) {
         game: {
           ...state.game,
           loading: true,
+          error: "",
         },
       };
     case SUCCESS_FETCH_DATA:
@@ -105,7 +106,7 @@ export function reducer(state, action) {
         game: {
           ...state.game,
           loading: false,
-          error: "",
+          error: action.payload,
         },
       };
     case SELECT_CARD:

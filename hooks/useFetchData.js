@@ -26,8 +26,7 @@ export function useFetchData() {
           });
         })
         .catch((err) => {
-          dispatch({ type: FAIL_FETCH_DATA });
-          console.log({ err });
+          dispatch({ type: FAIL_FETCH_DATA, payload: err.message });
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

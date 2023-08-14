@@ -10,12 +10,13 @@ import { Statistics } from "../Statistics";
 import { Cards } from "../Cards";
 import { Congratulations } from "../Congratulations";
 import { Loading } from "../Loading";
+import { Error } from "../Error";
 
 export function Board() {
   const [state] = useContext(StoreContext);
   const { game } = state;
 
-  const { data, loading, finished } = game;
+  const { data, loading, error, finished } = game;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const parsedData = useMemo(() => transformData(data), [data, finished]);
 
@@ -24,6 +25,7 @@ export function Board() {
   useGameCompleted();
 
   if (loading) return <Loading />;
+  if (error) return <Error error={error} />;
 
   return (
     <section className="container-boxed mb-8">

@@ -39,8 +39,8 @@ main {
   height: 64px;
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid purple;
-  border-color: purple transparent purple transparent;
+  border: 6px solid rgb(139 92 246);
+  border-color: rgb(139 92 246) transparent rgb(139 92 246) transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 

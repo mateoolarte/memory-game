@@ -22,7 +22,7 @@ export function Congratulations() {
   }
 
   return (
-    <div className="bg-slate-50 flex flex-col w-11/12 max-w-md mx-auto mt-8 sm:mt-10 py-6 px-4 rounded-lg shadow gap-4">
+    <div className="box">
       <span className="text-center text-5xl">🎉</span>
       <h2 className="text-slate-600 text-center text-xl font-bold">
         ¡Congratulations! {username}

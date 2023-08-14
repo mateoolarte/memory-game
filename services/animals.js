@@ -8,7 +8,6 @@ export async function getAnimals(nItems = 6) {
 
     return data;
   } catch (error) {
-    console.log({ error });
-    return [];
+    throw new Error("Oops! something was wrong");
   }
 }
