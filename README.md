@@ -35,12 +35,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - Responsive design
 - Successfull message when the game was ended and the posibility to change the level
 - Cache the data from api
+- Loading & Error states
 - Custom UI/UX
-- Deployed in Vercel
+- Deployed in Vercel through CI so every commit to the main branch will run the pipeline to deploy an updated version
+- Performance & Accesibility compliant you can find a report made by Lighthouse in the `assets` folder
 
 ## Tech Stack
 
-- NextJS (Setup & Dev Server)
+- NextJS
 - React
 - useReducer & context to state management
 - Localstorage to save the user config
